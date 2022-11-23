@@ -1,3 +1,5 @@
+from pymongo import MongoClient
+
 def search_article():  
     print('-----Search article-----')
 def search_authors():
@@ -26,4 +28,6 @@ def main_menu():
             print('Wrong input. Try again...')
         
 if __name__ == "__main__":
+    
+    
     main_menu()
