@@ -2,12 +2,24 @@ from pymongo import MongoClient
 
 def search_article():  
     print('-----Search article-----')
+    s_article_input = input('Enter one ore more keywords to search articles(separated by space) : ')
+    s_article_list = list(s_article_input.split(" "))
+    
+    
 def search_authors():
     print('-----Search authors-----')
+    s_author_input = input('Enter a keyword to search authors : ')
+    
+    
+    
 def list_venues():
     print('-----List venues-----')
+    n = input('Enter a number to see of top venues : ')
+    
+    
 def add_article():
     print('-----Add article-----')
+    
 
 
 def main_menu():
