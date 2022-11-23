@@ -16,7 +16,14 @@ def list_venues():
     print('-----List venues-----')
     while(True):
         n = input('Enter a number to see of top venues : ')
-        if( int(n) > 0):
+        
+        err_count = 0 
+        for char in n:
+            if(ord(char) < 48 or ord(char) > 57):
+                err_count = err_count + 1
+              
+        if(err_count == 0 and int(n) > 0):
+            print(int(n))
             break
         else:
             print('Wrong number. Try again...')
