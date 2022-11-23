@@ -14,12 +14,13 @@ def search_authors():
     
 def list_venues():
     print('-----List venues-----')
-    n = input('Enter a number to see of top venues : ')
+    while(True):
+        n = input('Enter a number to see of top venues : ')
+        if( int(n) > 0):
+            break
+        else:
+            print('Wrong number. Try again...')
     
-    if(int(n) > 0):
-        pass
-    else:
-        print('Wrong number. Try again...')
     
     
 def add_article():
