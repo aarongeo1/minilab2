@@ -41,5 +41,5 @@ def main_menu():
         
 if __name__ == "__main__":
     
-    
+    port = input('Enter a port number : ')
     main_menu()
