@@ -13,6 +13,6 @@ def connect(jfile,port = "27017"):
 
 
 if __name__ == "__main__":
-    jfile = input("Enter the json file")
-    port = input("Ënter the port number")
+    jfile = input("Enter the json file (INCLUDE .json) : ")
+    port = input("Ënter the port number : ")
     connect(jfile,port)
