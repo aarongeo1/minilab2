@@ -23,7 +23,6 @@ def list_venues():
                 err_count = err_count + 1
               
         if(err_count == 0 and int(n) > 0):
-            print(int(n))
             ##code goes here
             break
         else:
