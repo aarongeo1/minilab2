@@ -125,18 +125,44 @@ def list_venues():
     while(True):
         print('\n-----List venues-----\n')
         n = input('Enter a number to see of top venues : ')
-        
-        err_count = 0 
-        for char in n:
-            if(ord(char) < 48 or ord(char) > 57):
-                err_count = err_count + 1
-              
-        if(err_count == 0 and int(n) > 0):
-            ##code goes here
+
+        if n.isdigit() == True:
+            a_dic = {}
+            a_list =[]
+            l1 = []
+            val = collection.aggregate([
+                {"$group": {"_id":"$venue","num_of":{"$sum": 1}}},
+                {"$project":{"venue":"$_id","num_of":1,"_id":0}}
+                ])
+            for i in val:
+                a_dic[i["venue"]] = i["num_of"]
+                a_list.append(i["venue"])
+            val1 = collection.aggregate([
+                {"$lookup":{"from":"dblp","localField":"id","foreignField":"references","as": "citeds"}},
+                {"$unwind": "$citeds"},
+                {"$match":{"venue":{"$ne":""}}},
+                {"$group": {"_id":"$venue","unique":{"$addToSet": "$citeds.id"}}},
+                {"$project":{"num_of_ref":{"$size":"$unique"}}},
+                {"$sort":{"num_of_ref":-1}},
+                {"$limit":int(n)}
+            ])
+            for i in val1:
+                l1.append([i["_id"],i["num_of_ref"]])
+            i = 0
+            no_r = 0
+            while i < len(l1) and no_r < int(n):
+                print("Venue : ",l1[i][0],"   no of articles : ",a_dic[l1[i][0]],"    no of references : ",l1[i][1])
+                a_list.remove(l1[i][0])
+                i += 1
+                no_r += 1
+            i = 0
+            while i < len(a_list) and no_r < int(n):
+                print("Venue : ",a_list[i],"   no of articles : ",a_dic[a_list[i]],"    no of references : ",0) 
+                i += 1
+                no_r += 1  
             break
         else:
-            print('Wrong number. Try again...')
-    
+            print("Not a number , Try Again")
         
 def add_article():
     while(True):
@@ -185,3 +211,4 @@ if __name__ == "__main__":
     port = input('Enter a port number : ')
     connect(port)
     main_menu()
+
