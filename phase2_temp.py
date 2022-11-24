@@ -17,7 +17,7 @@ def intify(s):
 
 def search_article():
     global collection
-    print('-----Search article-----')
+    print('\n-----Search article-----\n')
     s_article_input = input('Enter one ore more keywords to search articles(separated by space) : ')
     s_article_list = list(s_article_input.split(" "))
     l1 = []
@@ -35,14 +35,14 @@ def search_article():
     
     
 def search_authors():
-    print('-----Search authors-----')
+    print('\n-----Search authors-----\n')
     s_author_input = input('Enter a keyword to search authors : ')
     
     
     
 def list_venues():
-    print('-----List venues-----')
     while(True):
+        print('\n-----List venues-----\n')
         n = input('Enter a number to see of top venues : ')
         
         err_count = 0 
@@ -59,8 +59,8 @@ def list_venues():
     
     
 def add_article():
-    print('-----Add article-----')
     while(True):
+        print('\n-----Add article-----\n')
         id_input = input('Enter the id (Must be unique) : ')
         title_input = input('Enter the title : ')
         author_input = input('Enter the one or more authors(separeted by space) : ')
@@ -70,7 +70,8 @@ def add_article():
         
         exist = list(collection.find({"id" : { "$eq" : id_input} }))
         
-        if(exist or (id_input == "") or (title_input == "") or (author_input == "") or (year_input == "")):
+        if((exist) or (id_input == "") or (title_input == "") or (author_input == "") or (year_input == "")):
+            
             print('Wrong input. Either is not unique or some of the input is blank. try again...')
         else:
             print('Successfully added.')
@@ -79,9 +80,9 @@ def add_article():
 
 
 def main_menu():
-    print('-----Main menu-----')
     while(True):
-        m_input = input('Enter 1 to Seach articles, 2 to Search authors, 3 to List venues, 4 to Add articles, or 5 to terminate the program : ')
+        print('\n-----Main menu-----\n')
+        m_input = input('1.Seach articles\n2.Search authors\n3.List venues\n4.Add articles\n5.terminate the program\n\nEnter your input :  ')
         if(m_input == '1'):
             search_article()
         elif(m_input == '2'):
