@@ -1,9 +1,31 @@
 from pymongo import MongoClient
 
-def search_article():  
+db = None
+collection = None
+
+def connect(port = "27017"):
+    global collection
+    client = MongoClient("mongodb://localhost:{}".format(port))
+    db = client["291db"]
+    collection = db["dblp"]
+
+def search_article():
+    global collection
     print('-----Search article-----')
     s_article_input = input('Enter one ore more keywords to search articles(separated by space) : ')
     s_article_list = list(s_article_input.split(" "))
+    l1 = []
+    for i in s_article_list:
+        rgx = {"$regex":i,"$options":"i"}
+        val = collection.aggregate([
+            {"$match":{"$or":[{"title":rgx},{"authors":rgx},{"abstract":rgx},{"venue":rgx},{"year":rgx}]}},
+            {"$project":{"title":1,"year":1,"venue":1}}
+        ])
+        l1.append(val)
+    for i in l1:
+        for j in i:
+            print(j)
+    
     
     
 def search_authors():
@@ -55,4 +77,5 @@ def main_menu():
 if __name__ == "__main__":
     
     port = input('Enter a port number : ')
+    connect(port)
     main_menu()
