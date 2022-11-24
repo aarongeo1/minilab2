@@ -71,7 +71,6 @@ def add_article():
         exist = list(collection.find({"id" : { "$eq" : id_input} }))
         
         if((exist) or (id_input == "") or (title_input == "") or (author_input == "") or (year_input == "")):
-            
             print('Wrong input. Either id is not unique or some of the input is blank. try again...')
         else:
             print('Successfully added.')
