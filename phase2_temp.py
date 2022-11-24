@@ -60,6 +60,21 @@ def list_venues():
     
 def add_article():
     print('-----Add article-----')
+    while(True):
+        id_input = input('Enter the id (Must be unique) : ')
+        title_input = input('Enter the title : ')
+        author_input = input('Enter the one or more authors(separeted by space) : ')
+        author_list = list(author_input.split(" "))
+        year_input = input('Enter the year : ')
+        
+        
+        exist = list(collection.find({"id" : { "$eq" : id_input} }))
+        
+        if(exist or (id_input == "") or (title_input == "") or (author_input == "") or (year_input == "")):
+            print('Wrong input. Either is not unique or some of the input is blank. try again...')
+        else:
+            print('Successfully added.')
+            break
     
 
 
