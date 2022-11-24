@@ -56,8 +56,7 @@ def list_venues():
         else:
             print('Wrong number. Try again...')
     
-    
-    
+        
 def add_article():
     while(True):
         print('\n-----Add article-----\n')
