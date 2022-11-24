@@ -72,7 +72,7 @@ def add_article():
         
         if((exist) or (id_input == "") or (title_input == "") or (author_input == "") or (year_input == "")):
             
-            print('Wrong input. Either is not unique or some of the input is blank. try again...')
+            print('Wrong input. Either id is not unique or some of the input is blank. try again...')
         else:
             print('Successfully added.')
             break
