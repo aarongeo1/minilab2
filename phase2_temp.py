@@ -73,6 +73,11 @@ def add_article():
         if((exist) or (id_input == "") or (title_input == "") or (author_input == "") or (year_input == "")):
             print('Wrong input. Either id is not unique or some of the input is blank. try again...')
         else:
+            data_dict = { "id": id_input, "title": title_input, "authors": author_list,"year": year_input,"abstract": None,"venue": None,"references": [],"n_citations": 0}
+            collection.insert_one(data_dict)
+            show = list(collection.find({"id" : { "$eq" : id_input} }))
+            for x in show:
+                print(x)
             print('Successfully added.')
             break
     
