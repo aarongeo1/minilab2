@@ -9,6 +9,12 @@ def connect(port = "27017"):
     db = client["291db"]
     collection = db["dblp"]
 
+def intify(s):
+    if s.isdigit() == True:
+        return int(s)
+    else:
+        return s
+
 def search_article():
     global collection
     print('-----Search article-----')
@@ -18,8 +24,8 @@ def search_article():
     for i in s_article_list:
         rgx = {"$regex":i,"$options":"i"}
         val = collection.aggregate([
-            {"$match":{"$or":[{"title":rgx},{"authors":rgx},{"abstract":rgx},{"venue":rgx},{"year":rgx}]}},
-            {"$project":{"title":1,"year":1,"venue":1}}
+            {"$match":{"$or":[{"title":rgx},{"authors":rgx},{"abstract":rgx},{"venue":rgx},{"year":intify(i)}]}},
+            {"$project":{"id":1,"title":1,"year":1,"venue":1,"_id":0}}
         ])
         l1.append(val)
     for i in l1:
